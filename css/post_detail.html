@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.poster_name }} - Пост {{ post.pk }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>{{ post.poster_name }} - Пост {{ post.pk }}</h1>
+    <div>
+        <h2>{{ post.poster_name }}</h2>
+        <img src="{{ post.poster_avatar }}" alt="Аватар">
+        <img src="{{ post.pic }}" alt="Картинка поста">
+        <p>{{ post.content }}</p>
+        <p>Просмотры: {{ post.views_count }}</p>
+        <p>Лайки: {{ post.likes_count }}</p>
+    </div>
+    <div>
+        <h2>Комментарии:</h2>
+        {% if comments %}
+            <ul>
+                {% for comment in comments %}
+                <li>
+                    <strong>{{ comment.commenter_name }}</strong>: {{ comment.comment }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>К этому посту пока нет комментариев.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

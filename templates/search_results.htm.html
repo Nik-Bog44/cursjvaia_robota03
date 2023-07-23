@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результаты поиска</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>Результаты поиска по запросу: "{{ query }}"</h1>
+    {% if posts %}
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <h2>Пост {{ post.pk }}</h2>
+                    <h3>{{ post.poster_name }}</h3>
+                    <img src="{{ post.pic }}" alt="Картинка поста">
+                    <p>{{ post.content }}</p>
+                    <p>Просмотры: {{ post.views_count }}</p>
+                    <p>Лайки: {{ post.likes_count }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>По вашему запросу ничего не найдено.</p>
+    {% endif %}
+</body>
+</html>
+
