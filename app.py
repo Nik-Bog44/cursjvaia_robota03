@@ -15,13 +15,12 @@ def index():
 
 @app.route('/posts/<int:postid>')
 def post_detail(postid):
-    posts = get_posts_all()
-    post = next((p for p in posts if p['pk'] == postid), None)
+    post = get_post_by_pk(postid)
     if not post:
-        return "Пост не найден", 404
+        abort(404)
 
     comments = get_comments_by_post_id(postid)
-    return render_template('post_detail.html', post=post, comments=comments)
+    return render_template('post_detail.html', post=post, comments=comments, bookmark_icon='static/bookmark.png')
 
 
 @app.route('/search/')
@@ -48,7 +47,7 @@ def page_not_found(error):
 @app.errorhandler(500)
 def internal_server_error(error):
     return "Ошибка сервера", 500
-
+post=None
 
 @app.route('/api/posts', methods=['GET'])
 def api_get_all_posts():
